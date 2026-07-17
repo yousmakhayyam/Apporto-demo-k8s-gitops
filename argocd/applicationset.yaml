@@ -1,0 +1,30 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apporto-tenants
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/yousmakhayyam/Apporto-demo-k8s-gitops.git
+        revision: main
+        directories:
+          - path: tenants/*/*/*
+  template:
+    metadata:
+      name: '\''{{path.basename}}'\''
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/yousmakhayyam/Apporto-demo-app-nginx.git
+        path: helm
+        helm:
+          valueFiles:
+            - $values/tenants/{{path[1]}}/{{path[2]}}/{{path[3]}}/values.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '\''{{path[2]}}'\''
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
