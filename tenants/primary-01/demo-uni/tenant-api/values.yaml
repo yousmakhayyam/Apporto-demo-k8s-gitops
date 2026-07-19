@@ -8,3 +8,6 @@ service:
 env:
   - name: TENANT_ID
     value: "demo-uni"
+resources:
+  limits:
+    memory: 4Gi
