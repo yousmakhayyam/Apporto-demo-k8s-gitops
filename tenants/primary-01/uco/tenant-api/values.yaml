@@ -1,7 +1,0 @@
-replicaCount: 2
-image:
-  repository: apporto/tenant-api
-  tag: "v1.0.6"
-service:
-  type: ClusterIP
-  port: 8080
