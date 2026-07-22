@@ -1,0 +1,10 @@
+replicaCount: 2
+image:
+  repository: apporto/tenant-api
+  tag: "v1.0.0"
+service:
+  type: ClusterIP
+  port: 8080
+env:
+  - name: TENANT_ID
+    value: "latest-test"
