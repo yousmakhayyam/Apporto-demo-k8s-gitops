@@ -9,10 +9,10 @@ spec:
       repoURL: https://github.com/yousmakhayyam/Apporto-demo-k8s-gitops.git
       revision: main
       directories:
-      - path: tenants/*/*/*
+      - path: tenants/*/primary-01/*
   template:
     metadata:
-      name: "{{path.basename}}"
+      name: "{{path[2]}}-{{path[3]}}-{{path[3]}}-{{path[4]}}"
     spec:
       project: default
       source:
@@ -20,11 +20,13 @@ spec:
         path: helm
         helm:
           valueFiles:
-          - $values/tenants/{{path[1]}}/{{path[2]}}/{{path[3]}}/values.yaml
+          - tenants/{{path[1]}}/{{path[2]}}/{{path[3]}}/{{path[4]}}/values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: "{{path[2]}}"
+        namespace: "{{path[3]}}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+        - CreateNamespace=true

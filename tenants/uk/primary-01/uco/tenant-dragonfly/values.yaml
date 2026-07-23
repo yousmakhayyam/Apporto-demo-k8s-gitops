@@ -1,8 +1,7 @@
-replicaCount: 2
+replicaCount: 3
 image:
-  repository: nginx
-  tag: "1.25"
-  pullPolicy: IfNotPresent
-service:
-  type: ClusterIP
-  port: 80
+  repository: docker.dragonflydb.io/dragonflydb/dragonfly
+  tag: "v1.12.0"
+persistence:
+  enabled: true
+  size: 10Gi

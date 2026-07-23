@@ -6,3 +6,6 @@ image:
 service:
   type: ClusterIP
   port: 80
+env:
+  - name: TENANT_ID
+    value: "TENANT_PLACEHOLDER"
