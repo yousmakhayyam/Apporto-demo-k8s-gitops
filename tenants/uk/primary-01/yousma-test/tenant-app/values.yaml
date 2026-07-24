@@ -1,0 +1,11 @@
+replicaCount: 3
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: true
+  hostname: yousma-test.apporto.local
